@@ -54,11 +54,35 @@ program ListeAB (input, output);
 		writeln;
 	end;
 	
+	
+	
+	function Suchen (inRefAnfang : tRefListe; 
+					 inZahl : integer) : tRefListe;
+	
+	
+	var 
+	Zeiger : tRefListe; 
+	
+	begin 
+	 Zeiger := inRefAnfang; 
+	 if Zeiger <> nil then 
+		begin 
+		while (Zeiger^.next <> nil ) and (Zeiger^.info <> inZahl) do 
+		  Zeiger := Zeiger^.next; 
+		 if Zeiger^.info <> inZahl then 
+		 Zeiger := nil
+		 end; 
+		 Suchen := Zeiger; 
+	end; 
+	
 		
+	
+	
+		 
 begin 
 
 ListeAufbauen(myList);
 ListeDrucken(myList);
-
+Suchen(myList, 5);
 
 end.
