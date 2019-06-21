@@ -11,6 +11,9 @@ program ListeAB (input, output);
 				  info : integer; 
 				  next : tRefListe
 				  end;
+				  
+	var 
+	myList : tRefListe;
 
 	procedure ListeAufbauen(var outRefAnfang : tRefListe); 
 	
@@ -33,8 +36,29 @@ program ListeAB (input, output);
 		
 		
 		end;
+	
+	
+	procedure ListeDrucken (inRefAnfang : tRefListe); 
+	
+	var 
+	Hilfszeiger : tRefListe;
+	
+	begin  
+	
+	    Hilfszeiger := inRefAnfang;
+		while (Hilfszeiger <> nil) do 
+		begin
+		  write(Hilfszeiger^.info); 
+		  Hilfszeiger := Hilfszeiger^.next; 
+	    end; 
+		writeln;
+	end;
+	
 		
 begin 
+
+ListeAufbauen(myList);
+ListeDrucken(myList);
 
 
 end.
