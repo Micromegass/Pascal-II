@@ -78,6 +78,66 @@ program ListeAB (input, output);
 		
 	
 	
+	
+	
+	procedure SortedListAdd (var ioRefAnfang : tRefListe; 
+							 inZahl : integer); 
+							 
+	
+	
+	
+	var 
+	Zeiger, 
+	RefNeu 	: tRefListe; 
+	gefunden : boolean; 
+	
+	
+	
+	begin 
+		new(RefNeu); 
+		RefNeu^.info := inZahl; 
+		
+		if ioRefAnfang = nil then 
+		{leere Liste}
+		begin 
+		 RefNeu^.next := ioRefAnfang; 
+		 ioRefAnfang := RefNeu		
+		end
+		
+		else 
+		 if ioRefAnfang^.info > inZahl then 
+		 {Einfügen am Anfang}
+		 begin 
+		 RefNeu^.next := ioRefAnfang; 
+		 ioRefAnfang := RefNeu
+		 end
+		 
+		 else 
+		 begin 
+		 gefunden := false; 
+		 Zeiger := ioRefAnfang; 
+		 
+		 while (Zeiger^.next <> nil) and (not gefunden) do 
+		   if Zeiger^.next^.info > inZahl then 
+		   gefunden := true 
+		   else 
+		   Zeiger := Zeiger^.next; 
+		  
+		  if gefunden then 
+		   begin 
+		   RefNeu^.next := Zeiger^.next;
+		   Zeiger^.next := RefNeu
+		   end 
+		   
+		   else 
+		   begin
+		   Zeiger^.next := RefNeu; 
+		   RefNeu^.next := nil
+		end 
+	  end
+	end;
+	
+	
 		 
 begin 
 
