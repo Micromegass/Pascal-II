@@ -1,36 +1,98 @@
 
-function FeldZweitMax (var inFeld : tFeld) : integer;
-{ bestimmt die zweitgroesste Zahl in inFeld }
+program testeListenMaxBestimmen (input, output);
+{ Testet die Prozedur ListenMaxBestimmen }
+
+  type
+  tRefListe = ^tListe;
+  tListe = record
+             info : integer;
+             next : tRefListe
+           end;
 
   var
-  Max,
-  ZweitMax : integer;
-  Index : tIndex;
+  Liste : tRefListe;
+  Max : integer;
+  OK : boolean;
 
-begin
-{ Max und Zweitmax initialisieren }
-  if inFeld[1] < inFeld[2] then    [3,4,56,7,8,9,0,0,8,7,3]
+
+  procedure ListenMaxBestimmen (    inRefAnfang: tRefListe; 
+                                var outMax : integer; 
+                                var outOK : boolean); 
+                                
+   var 
+   Zeiger : tRefListe;
+                                
+                                
+   begin 
+   write('Start Proz');
+    outMax := 0; 
+	Zeiger := inRefAnfang; 
+	outOK := true; 
+	
+	if Zeiger = nil then 
+		outOK := false
+	else 
+	begin
+	while Zeiger <> nil do 
+		if Zeiger^.info > max then 
+		outMax := Zeiger^.info 
+		else 
+		Zeiger := Zeiger^.next	
+	end
+   end;                              
+                                
+                             
+                            
+  procedure LiesListe(var outListe : tRefListe);
+  { Liest eine (evtl. leere) Liste ein und gibt deren Anfangszeiger outListe zurueck. }
+
+    var
+    Anzahl : integer;
+    i : integer;
+    neueZahl : integer;
+    Listenanfang,
+    Listenende : tRefListe;
+
+
   begin
-    Max := inFeld[2];
-    ZweitMax := inFeld[1]
-  end
-  else
-  begin
-    Max := inFeld[1];
-    ZweitMax := inFeld[2]
-  end;
-  { Rest von inFeld durchsuchen }
-  for Index := 3 to FELDGROESSE do
-    if inFeld[Index] > Max then 
-    { neues Maximum gefunden }
+    Listenanfang := nil;
+    repeat
+      write ('Wie viele Zahlen wollen Sie eingeben? ');
+      readln (Anzahl);
+    until Anzahl >= 0;
+ 
+    write ('Bitte geben Sie ', Anzahl, ' Zahlen ein: ');
+
+    { Liste aufbauen }
+    for i := 1 to Anzahl do
     begin
-      ZweitMax := Max;
-      Max := inFeld[Index];
-    end
-    else
-      if inFeld[Index] > ZweitMax then 
-      { neue zweitgroesste Zahl gefunden }
-        ZweitMax := inFeld[Index];
-  { Ende der for-Anweisung }
-  FeldZweitMax := ZweitMax
-end; { FeldZweitMax }
+      read (neueZahl);
+      if Listenanfang = nil then
+      begin
+        new (Listenanfang);
+        Listenanfang^.next := nil;
+        Listenanfang^.info := neueZahl;
+        Listenende := Listenanfang;
+      end
+      else
+      begin
+        new (Listenende^.next);
+        Listenende := Listenende^.next;
+        Listenende^.next := nil;
+        Listenende^.info := neueZahl
+      end  { if Liste = nil }
+    end; { for }
+    outListe := Listenanfang;
+    writeln
+  end; { LiesListe }
+
+
+begin 
+  LiesListe (Liste);
+  ListenMaxBestimmen(Liste, Max, OK);
+  if OK then 
+    writeln ('Das Maximum ist ', Max, '.')
+  else
+    writeln ('Leere Eingabefolge!');
+end. { testeListenMaxBestimmen }
+
