@@ -1,31 +1,19 @@
+program WasPassiert(input, output);
+var
+  a, b, c: Integer;
 
-program Maxi (input, output); 
+begin
+  b := 0;
+  c := 1;
+  readln(a);
+  while a > 0 do
+  begin
+    b := b+c*(a mod 2);
+    a := a div 2;
+    c := c*10;
+  end;
+  writeln(b);
+    writeln(c);
+  writeln(a)
 
-const 
-MAX = 4;
-
-
-var 
-eingabe : integer;
-minimum : integer;
-
-
-begin 
-	readln(eingabe);
-	minimum := eingabe; 
-	
-	while eingabe <> 0 do
-	begin
-		if eingabe < minimum then 
-		minimum := eingabe;
-	readln(eingabe)
-	end; 
-	
-	if minimum <> 0 then 
-		write(minimum)
-	else
-		write('nur eine 0 eingegebne')
-	
-end. 
-
-
+end.

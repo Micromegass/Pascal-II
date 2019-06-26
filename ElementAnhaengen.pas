@@ -17,6 +17,7 @@ program EA (output);
     eingabe : integer;
     myinRefAnfang : tRefListe;
     myRefEnde : tRefListe;
+    
 
 
 	procedure ElementAnhengen ( inZahl : integer;
