@@ -44,7 +44,32 @@ program EA (output);
 		inoutRefEnde := Zeiger; 
 		end
 		
-		end; 						
+		end; 	
+		
+		
+			function pd (inoutRefAnfang : tRefListe ) : tRefListe; 
+	
+		var 
+		Zeiger, 
+		ZeigerHinten : tRefListe; 
+		
+		begin
+		
+		Zeiger := inoutRefAnfang; 
+		ZeigerHinten := inoutRefAnfang;
+		while Zeiger <> nil do 
+		  if Zeiger^.info = 1 then 
+		   Zeiger := Zeiger^.next
+		  else 
+		  begin 
+		   Zeiger^.info := ZeigerHinten^.info + Zeiger^.info;
+		   ZeigerHinten := ZeigerHinten^.next; 
+		   Zeiger := Zeiger^.next
+		   end ;
+		pd := inoutRefAnfang
+		end;
+		
+							
 	
 begin 
 myinRefAnfang := nil;
@@ -59,9 +84,12 @@ readln(eingabe);
   
   zeig := myinRefAnfang; 
   
+  
+  pd(zeig);
+  
   while zeig <> nil do 
   begin
-   writeln(zeig^.info);
+   write(zeig^.info);
    zeig := zeig^.next
   end
 
