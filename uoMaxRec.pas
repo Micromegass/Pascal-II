@@ -17,6 +17,7 @@ program xy (input, output) ;
   i : integer;
   Zahl : integer;
 
+
 function FeldMaxA (
               inFeld : tFeld;
               inUnten,

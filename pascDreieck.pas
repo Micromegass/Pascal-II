@@ -60,6 +60,26 @@ procedure listeDrucken (inRefAnfang: tRefListe);
 	function PascalscheDreieck(inRefAnfang: tRefListe): tRefListe;
 	
 	
+	var 
+	neuerAnfang, Zeiger : tRefListe; 
+	
+	
+	begin
+	
+	Zeiger := inRefAnfang ; 
+	while Zeiger^.next <> nil do 
+	begin 
+	Zeiger^.wert := Zeiger^.wert + Zeiger^.next^.wert; 
+	Zeiger := Zeiger^.next; 
+	end; 
+	
+	new(neuerAnfang); 
+	neuerAnfang^.wert := 1;
+	neuerAnfang^.next := inRefAnfang; 
+	inRefAnfang := neuerAnfang;
+	
+	PascalscheDreieck := inRefAnfang
+	
 	end;
     
     

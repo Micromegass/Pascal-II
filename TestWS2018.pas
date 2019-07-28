@@ -86,12 +86,6 @@ function sub(inListeA: tRefListe; inListeB: tRefListe): tRefListe;
 	end; 
 
 
-
-
-
-
-
-
 begin
 
 
@@ -99,7 +93,7 @@ begin
 listA := nil; 
 listB := nil; 
 listA := listeAufbauen(listA); 
-writeln('neue Liste');
+writeln('neue Liste');s
 listB := listeAufbauen(listB); 
 
 writeln('-----------------------'); 
