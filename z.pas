@@ -82,31 +82,96 @@ program z (input, output) ;
 
 
 
-  function findnum(inWurzel : tRefBinBaum; inZahl : integer) : boolean; 
-  
-  
-  
-  var 
-  ergebnis : boolean; 
-  
-  
-  begin
-  
-	if inRefWurzel^.info <> inZahl then 
+	procedure Baumpfad(inWurzel: tRefBinBaum; inSuch: integer); 
+	
+	begin 
+	
+	if inWurzel <> nil then 
+	  if inSuch = inWurzel^.info then 
+	  write(inSuch)
+	  else 
+	  begin
+	  Baumpfad(inWurzel^.links,inSuch);
+	  write(inWurzel^.info); 
+	  Baumpfad(inWurzel^.rechts, inSuch)
+	  end
+	
+	
+	
+	end;
+	
+	
+			
+		function Vorkommen (inRefWurzel : tRefBinBaum;inSuchwert : integer) : integer;
+		{ ermittelt die Anzahl aller Knoten des Baumes, auf dessen
+		Wurzel inRefWurzel zeigt, bei denen der Wert der
+		info-Komponenten mit dem Wert von inSuchwert
+		uebereinstimmt }
+		var
+		Anzahl : integer;
+		begin
+		if inRefWurzel = nil then
+		Vorkommen := 0
+		else
+		begin
+		Vorkommen := Vorkommen (inRefWurzel^.rechts, inSuchwert)
+		+ Vorkommen (inRefWurzel^.links, inSuchwert);
+		if inRefWurzel^.info >= inSuchwert then
+		Vorkommen := Vorkommen + 1
+		end; { if inRefWurzel = nil }
+		end; { Vorkommen }
+			
+	 
 		
-		ergebnis := findnum()
+		
+		procedure HRZWei(inRefWurzel : tRefBinBaum; var ioDrucken : boolean); 
+		
+		var
+		drucken : boolean ; 
+		
+		
+		begin
+		 if inRefWurzel<>NIL then
+		begin 
+		 drucken := ioDrucken; 
+		 if drucken then 
+		 begin
+			write(inRefWurzel^.info); 
+			drucken := false; 
+			HRZWei(inRefWurzel^.links, drucken);
+			HRZWei(inRefWurzel^.rechts, drucken)
+		 end
+		 else 
+		 begin 
+		 drucken := true;
+		 HRZwei(inRefWurzel^.links, drucken); 
+		 HRZwei(inRefWurzel^.rechts, drucken);
+		 end
+		 end
+		end;
+	
+	
+	   procedure HRZwei2(inRefWurzel:tRefBinBaum; var ioDrucken:boolean);
+		{Gibt jeden zweiten Knotenwert der Hauptreihenfolge aus }
+		begin
+		if inRefWurzel<>NIL then
+		{ Nur wenn der Baum nicht leer ist... }
+		begin
+		if ioDrucken then
+		{ Muss der Wert ausgegeben werden? }
+		writeln(inRefWurzel^.info);
+		ioDrucken := not ioDrucken;
+		 HRZwei(inRefWurzel^.links, ioDrucken);
+		 HRZwei(inRefWurzel^.rechts, ioDrucken)
+		end;
+		end;
   
-	
-	
-
-  end;
-
 
 begin 
 
+x := false;
 BBAufbauen(mytree); 
-BaumAusgeben(mytree);
-x := findNum(mytree, 4);
-write(x)
-
+HRZwei(mytree, x);
+write('------------');
+HRZWei2(mytree, x)
 end .

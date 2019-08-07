@@ -69,7 +69,7 @@ begin
 	  Zeiger^.info := Zahl;
 	  RefAnfang := Zeiger;
 	  readln(Zahl)
-     end;
+     end;tt
      
      gef := false;
      myVal := 5;      
