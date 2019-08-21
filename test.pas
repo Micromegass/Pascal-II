@@ -1,21 +1,41 @@
-program WasPassiert(input,output); 
-type
-  tNatZahl = 0..maxint;
-var
-  a:tNatZahl;
-  b:tNatZahl;
-  x:tNatZahl;
+program x (input, output) ; 
+
+	type
+	tFeld = array[0..10] of integer; 
+	
+	var 
+	i, j, Zahl : integer; 
+	myfeld : tFeld;
+
+	procedure c (var ioFeld : tFeld) ; 
+	
+	begin
+		for i := 1 to 10 do 
+		begin
+		  for j:=i+1 to 10 do 
+			 if ioFeld[i]= ioFeld[j] then
+			   ioFeld[j] := 0;
+		end
+	end; 
+	
+	
+	
+	
+begin 
+
+for i:=1 to 10 do 
 begin
-x:=0;
-writeln('Geben Sie zwei natürliche Zahlen ein: '); readln(a);
-readln(b);
-if a<b then
-begin
-    b:=a+b;
-    a:=b-a;
-    b:=b-a
-end;
-while a>=b do begin
-a:=a-b;
-x:=x+1 end;
-writeln('Ergebnis: ',x,' ',a) end.
+	write('Zahl');
+    readln(Zahl);
+    myFeld[i] := Zahl
+    
+end;  
+
+
+c(myfeld); 
+for i:= 1 to 10 do 
+	write(myfeld[i]);
+	
+
+
+end.

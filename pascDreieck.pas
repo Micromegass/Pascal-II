@@ -1,7 +1,4 @@
-
-
-
-program x (input, output) ; 
+program testingPD (input, output) ; 
 
 	type 
 	tRefListe = ^tListe ; 
@@ -10,13 +7,12 @@ program x (input, output) ;
 				next : tRefListe
 				end; 
 				
-				
-				
-var
-mylist : tRefListe;
+						
+	var
+	mylist : tRefListe;
 			
-function listeAufbauen (outRefAnfang : tRefListe) : tRefListe;
-
+	function listeAufbauen (outRefAnfang : tRefListe) : tRefListe;
+	{baut liste auf}
 	var 
 	Zeiger : tRefListe;
 	Zahl : integer;
@@ -38,16 +34,14 @@ function listeAufbauen (outRefAnfang : tRefListe) : tRefListe;
 	end; 
 	
 	
-	
-	
-procedure listeDrucken (inRefAnfang: tRefListe);
-
-	var 
-	Zeiger : tRefListe; 
-	
+	procedure listeDrucken (inRefAnfang: tRefListe);
+	{gibt liste aus}
+		var 
+		Zeiger : tRefListe; 
+		
 	begin
-	Zeiger := inRefAnfang; 
-	while Zeiger <> nil do 
+	 Zeiger := inRefAnfang; 
+	 while Zeiger <> nil do 
 	 begin
 	  write(Zeiger^.wert, '-->');
 	  Zeiger := Zeiger^.next
@@ -55,10 +49,7 @@ procedure listeDrucken (inRefAnfang: tRefListe);
 	end;
 		
 
-
-
 	function PascalscheDreieck(inRefAnfang: tRefListe): tRefListe;
-	
 	
 	var 
 	neuerAnfang, Zeiger : tRefListe; 
@@ -67,11 +58,11 @@ procedure listeDrucken (inRefAnfang: tRefListe);
 	begin
 	
 	Zeiger := inRefAnfang ; 
-	while Zeiger^.next <> nil do 
-	begin 
-	Zeiger^.wert := Zeiger^.wert + Zeiger^.next^.wert; 
-	Zeiger := Zeiger^.next; 
-	end; 
+	 while Zeiger^.next <> nil do 
+	 begin 
+	 Zeiger^.wert := Zeiger^.wert + Zeiger^.next^.wert; 
+	 Zeiger := Zeiger^.next; 
+	 end; 
 	
 	new(neuerAnfang); 
 	neuerAnfang^.wert := 1;
