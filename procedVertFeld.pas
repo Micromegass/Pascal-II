@@ -57,7 +57,7 @@ program ListeAB (input, output);
 	
 	
 	function Suchen (inRefAnfang : tRefListe; 
-					 inZahl : integer) : tRefListe;
+				t	 inZahl : integer) : tRefListe;
 	
 	
 	var 

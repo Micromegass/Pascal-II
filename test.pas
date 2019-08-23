@@ -1,41 +1,18 @@
-program x (input, output) ; 
 
-	type
-	tFeld = array[0..10] of integer; 
-	
-	var 
-	i, j, Zahl : integer; 
-	myfeld : tFeld;
+program WasPassiert (input, output);
+                                 
+ var
+ a,b : integer;
 
-	procedure c (var ioFeld : tFeld) ; 
-	
-	begin
-		for i := 1 to 10 do 
-		begin
-		  for j:=i+1 to 10 do 
-			 if ioFeld[i]= ioFeld[j] then
-			   ioFeld[j] := 0;
-		end
-	end; 
-	
-	
-	
-	
-begin 
-
-for i:=1 to 10 do 
 begin
-	write('Zahl');
-    readln(Zahl);
-    myFeld[i] := Zahl
-    
-end;  
-
-
-c(myfeld); 
-for i:= 1 to 10 do 
-	write(myfeld[i]);
-	
-
-
+ readln ( a );
+ readln ( b );
+ while ( a mod b <> 0 ) do
+ begin
+   if ( a < b ) then
+     b := b - a
+   else
+     a := a - b;
+ end;
+ writeln (b)
 end.
